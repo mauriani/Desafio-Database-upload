@@ -1,6 +1,6 @@
 // import AppError from '../errors/AppError';
 
-/*import { getCustomRepository } from 'typeorm';
+import { getCustomRepository } from 'typeorm';
 
 import TransactionsRepository from '../repositories/TransactionsRepository';
 
@@ -22,6 +22,17 @@ class CreateTransactionService {
   }: Request): Promise<Transaction> {
     const transactionsRepository = getCustomRepository(TransactionsRepository);
 
+    //validar o type da aplicação
+    if (!['income', 'outcome'].includes(type)) {
+      throw new Error('Invalid transaction type!');
+    }
+
+    // const { total } = transactionsRepository.getBalance();
+
+    /*  if (type == 'outcome' && total < value) {
+      throw new Error('Insufficient funds!');
+    }*/
+
     const transaction = transactionsRepository.create({
       title,
       value,
@@ -34,4 +45,4 @@ class CreateTransactionService {
   }
 }
 
-export default CreateTransactionService;*/
+export default CreateTransactionService;
